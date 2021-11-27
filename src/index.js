@@ -22,7 +22,7 @@ export default function BaseballGame() {
   };
 
   const getRandomComputerInputNumber = () => {
-    localStorage.getItem("computerInputNumber");
+    return localStorage.getItem("computerInputNumber");
   };
 
   const play = (computerInputNumbers, userInputNumbers) => {
@@ -32,7 +32,8 @@ export default function BaseballGame() {
   const getUserInput = () => {
     const userInputButton = document.getElementById("submit");
     const userInput = document.getElementById("user-input");
-    userInputButton.addEventListener("click", () => {
+    userInputButton.addEventListener("click", (e) => {
+      e.preventDefault();
       if (!isCheckValidUserInput(userInput.value)) {
         userInput.value = "";
       } else {
