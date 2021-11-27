@@ -9,7 +9,7 @@ const isNotExceedCondition = (userInput) => {
 };
 
 const isDuplicatedUserInput = (userInput) => {
-  return new Set([...userInput]).length !== MAX_LENGTH;
+  return [...new Set(userInput)].length !== MAX_LENGTH;
 };
 
 export default function isCheckValidUserInput(userInput) {
