@@ -25,8 +25,20 @@ export default function BaseballGame() {
     return localStorage.getItem("computerInputNumber");
   };
 
+  const compareInputs = (computerInputNumbers, userInputNumbers) => {
+    let [ball, strike] = [0, 0];
+    for (let i = 0; i < MAX_LENGTH; i += 1) {
+      if (computerInputNumbers[i] === userInputNumbers[i]) {
+        strike += 1;
+      } else if (userInputNumbers.includes(computerInputNumbers[i])) {
+        ball += 1;
+      }
+    }
+    return [ball, strike];
+  };
+
   const play = (computerInputNumbers, userInputNumbers) => {
-    console.log(computerInputNumbers, userInputNumbers);
+    compareInputs(computerInputNumbers, userInputNumbers);
   };
 
   const getUserInput = () => {
