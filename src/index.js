@@ -5,6 +5,7 @@ import {
   MAX_LENGTH,
   CORRECT_ANSWER,
   ASK_RESTART,
+  NO_CORRECT_ANSWER,
 } from "./constants.js";
 
 export default function BaseballGame() {
@@ -58,7 +59,7 @@ export default function BaseballGame() {
   const printResult = ([ball, strike]) => {
     const result = document.getElementById("result");
     if (ball === 0 && strike === 0) {
-      result.innerText = "낫싱";
+      result.innerText = NO_CORRECT_ANSWER;
     } else if (strike === 3) {
       result.innerHTML = CORRECT_ANSWER + ASK_RESTART;
       const restartButton = document.getElementById("game-restart-button");
