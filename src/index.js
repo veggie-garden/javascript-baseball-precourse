@@ -1,5 +1,11 @@
 import isCheckValidUserInput from "./check_valid.js";
-import { MIN_NUMBER, MAX_NUMBER, MAX_LENGTH } from "./constants.js";
+import {
+  MIN_NUMBER,
+  MAX_NUMBER,
+  MAX_LENGTH,
+  CORRECT_ANSWER,
+  ASK_RESTART,
+} from "./constants.js";
 
 export default function BaseballGame() {
   const randomComputerInputNumber = () => {
@@ -37,8 +43,23 @@ export default function BaseballGame() {
     return [ball, strike];
   };
 
+  const printResult = ([ball, strike]) => {
+    const result = document.getElementById("result");
+    if (ball === 0 && strike === 0) {
+      result.innerText = "낫싱";
+    } else if (strike === 3) {
+      result.innerHTML = CORRECT_ANSWER + ASK_RESTART;
+    } else if (ball === 0) {
+      result.innerText = `${strike}스트라이크`;
+    } else if (strike === 0) {
+      result.innerText = `${ball}볼`;
+    } else {
+      result.innerText = `${ball}볼 ${strike}스트라이크`;
+    }
+  };
+
   const play = (computerInputNumbers, userInputNumbers) => {
-    compareInputs(computerInputNumbers, userInputNumbers);
+    printResult(compareInputs(computerInputNumbers, userInputNumbers));
   };
 
   const getUserInput = () => {
