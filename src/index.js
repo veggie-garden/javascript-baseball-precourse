@@ -43,12 +43,26 @@ export default function BaseballGame() {
     return [ball, strike];
   };
 
+  const clean = () => {
+    const userInput = document.getElementById("user-input");
+    userInput.value = "";
+    const result = document.getElementById("result");
+    result.textContent = "";
+  };
+
+  const restart = () => {
+    saveRandomComputerInputNumber();
+    clean();
+  };
+
   const printResult = ([ball, strike]) => {
     const result = document.getElementById("result");
     if (ball === 0 && strike === 0) {
       result.innerText = "낫싱";
     } else if (strike === 3) {
       result.innerHTML = CORRECT_ANSWER + ASK_RESTART;
+      const restartButton = document.getElementById("game-restart-button");
+      restartButton.onclick = restart;
     } else if (ball === 0) {
       result.innerText = `${strike}스트라이크`;
     } else if (strike === 0) {
