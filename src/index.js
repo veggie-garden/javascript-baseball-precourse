@@ -8,22 +8,24 @@ import {
   NO_CORRECT_ANSWER,
 } from "./constants.js";
 
-const randomComputerInputNumber = () => {
+const generateRandomNumber = () => {
   const flag = new Array(10).fill(0);
-  let computerInputNumber = "";
-  while (computerInputNumber.length < MAX_LENGTH) {
+  let randomNumber = "";
+
+  while (randomNumber.length < MAX_LENGTH) {
     let num = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
     while (flag[num] === 1) {
       num = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
     }
     flag[num] = 1;
-    computerInputNumber += num;
+    randomNumber += num;
   }
-  return computerInputNumber;
+
+  return randomNumber;
 };
 
 const saveRandomComputerInputNumber = () => {
-  const computerNumber = randomComputerInputNumber();
+  const computerNumber = generateRandomNumber();
   localStorage.setItem("computerInputNumber", computerNumber);
 };
 
