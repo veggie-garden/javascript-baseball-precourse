@@ -70,7 +70,7 @@ const printResult = ([ball, strike]) => {
   } else if (strike === 3) {
     result.innerHTML = RESULT_REPLY.CORRECT_ANSWER + RESULT_REPLY.ASK_RESTART;
     const restartButton = document.getElementById("game-restart-button");
-    restartButton.addEventListener("click", restart());
+    restartButton.addEventListener("click", restart);
   } else if (ball === 0) {
     result.innerText = `${strike}스트라이크`;
   } else if (strike === 0) {
