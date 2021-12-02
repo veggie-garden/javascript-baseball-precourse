@@ -1,21 +1,18 @@
 import isCheckValidUserInput from "./check_valid.js";
 import {
-  MIN_NUMBER,
-  MAX_NUMBER,
-  MAX_LENGTH,
-  CORRECT_ANSWER,
-  ASK_RESTART,
-  NO_CORRECT_ANSWER,
+  NUMS,
+  LOCALSTORAGE_RANDOM_NUMBER_KEY,
+  RESULT_REPLY,
 } from "./constants.js";
 
 const generateRandomNumber = () => {
   const flag = new Array(10).fill(0);
   let randomNumber = "";
 
-  while (randomNumber.length < MAX_LENGTH) {
-    let num = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
+  while (randomNumber.length < NUMS.MAX_LENGTH) {
+    let num = MissionUtils.Random.pickNumberInRange(NUMS.MIN_NUMBER, NUMS.MAX_NUMBER);
     while (flag[num] === 1) {
-      num = MissionUtils.Random.pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
+      num = MissionUtils.Random.pickNumberInRange(NUMS.MIN_NUMBER, NUMS.MAX_NUMBER);
     }
     flag[num] = 1;
     randomNumber += num;
@@ -26,16 +23,16 @@ const generateRandomNumber = () => {
 
 const saveRandomComputerInputNumber = () => {
   const computerNumber = generateRandomNumber();
-  localStorage.setItem("computerInputNumber", computerNumber);
+  localStorage.setItem(LOCALSTORAGE_RANDOM_NUMBER_KEY, computerNumber);
 };
 
 const getRandomComputerInputNumber = () => {
-  return localStorage.getItem("computerInputNumber");
+  return localStorage.getItem(LOCALSTORAGE_RANDOM_NUMBER_KEY);
 };
 
 const compareInputs = (computerInputNumbers, userInputNumbers) => {
   let [ball, strike] = [0, 0];
-  for (let i = 0; i < MAX_LENGTH; i += 1) {
+  for (let i = 0; i < NUMS.MAX_LENGTH; i += 1) {
     if (computerInputNumbers[i] === userInputNumbers[i]) {
       strike += 1;
     } else if (userInputNumbers.includes(computerInputNumbers[i])) {
@@ -60,9 +57,9 @@ const restart = () => {
 const printResult = ([ball, strike]) => {
   const result = document.getElementById("result");
   if (ball === 0 && strike === 0) {
-    result.innerText = NO_CORRECT_ANSWER;
+    result.innerText = RESULT_REPLY.NO_CORRECT_ANSWER;
   } else if (strike === 3) {
-    result.innerHTML = CORRECT_ANSWER + ASK_RESTART;
+    result.innerHTML = RESULT_REPLY.CORRECT_ANSWER + RESULT_REPLY.ASK_RESTART;
     const restartButton = document.getElementById("game-restart-button");
     restartButton.onclick = restart;
   } else if (ball === 0) {
