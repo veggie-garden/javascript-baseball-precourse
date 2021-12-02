@@ -90,9 +90,7 @@ const getUserInput = () => {
 
   userInputButton.addEventListener("click", (e) => {
     e.preventDefault();
-    if (!isCheckValidUserInput(userInput.value)) {
-      userInput.value = "";
-    } else {
+    if (isCheckValidUserInput(userInput.value)) {
       play(getRandomComputerInputNumber(), userInput.value);
     }
   });
