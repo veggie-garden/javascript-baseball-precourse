@@ -8,14 +8,14 @@ import {
 const generateRandomNumber = () => {
   const flag = new Array(10).fill(0);
   let randomNumber = "";
+  let num = 0;
 
   while (randomNumber.length < NUMS.MAX_LENGTH) {
-    let num = MissionUtils.Random.pickNumberInRange(NUMS.MIN_NUMBER, NUMS.MAX_NUMBER);
-    while (flag[num] === 1) {
-      num = MissionUtils.Random.pickNumberInRange(NUMS.MIN_NUMBER, NUMS.MAX_NUMBER);
+    num = MissionUtils.Random.pickNumberInRange(NUMS.MIN_NUMBER, NUMS.MAX_NUMBER);
+    if (flag[num] === 0) {
+      randomNumber += num;
+      flag[num] = 1;
     }
-    flag[num] = 1;
-    randomNumber += num;
   }
 
   return randomNumber;
